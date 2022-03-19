@@ -6,8 +6,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +18,9 @@ public class TradeHelperApp extends Application {
     private final ObservableList<Runnable> startupTasks = FXCollections.observableArrayList();
     private final BooleanBinding startupTasksFinished = Bindings.isEmpty(startupTasks);
 
-    public TradeHelperApp getSingleton() {
+    private SceneManager defaultSceneManager;
+
+    public static TradeHelperApp getSingleton() {
         return singleton;
     }
 
@@ -31,21 +31,26 @@ public class TradeHelperApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        defaultSceneManager = new SceneManager(stage);
         handleLaunch();
-        makeWindow(stage);
     }
 
-    public void handleLaunch() {
-        var latch = new CountDownLatch(1);
+    public void handleLaunch() throws IOException {
+        var sceneManager = new SceneManager(new Stage());
+        sceneManager.invokeLaunchWindow();
 
+        var latch = new CountDownLatch(1);
         startupTasksFinished.addListener((observableValue, aBoolean, isFinished) -> {
             if (isFinished) {
                 latch.countDown();
             }
         });
 
-        startInBackground("Trade Helper Launch", () -> backgroundStart());
+        startInBackground("Trade Helper Launch", this::backgroundStart);
+        sceneManager.hide();
+        defaultSceneManager.invokeHomeWindow();
     }
+
 
     private void startInBackground(String taskName, Runnable task) {
         var t = new Thread(() -> {
@@ -53,18 +58,11 @@ public class TradeHelperApp extends Application {
 
             startupTasks.remove(task);
         }, taskName + " Thread");
+
         t.setDaemon(true);
         t.start();
 
         startupTasks.add(task);
-    }
-
-    private void makeWindow(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(TradeHelperApp.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
     }
 
     public static void main(String[] args) {
@@ -72,6 +70,6 @@ public class TradeHelperApp extends Application {
     }
 
     private void backgroundStart() {
-        assert Platform.isFxApplicationThread() == false; //Warning
+        assert !Platform.isFxApplicationThread(); //Warning
     }
 }
