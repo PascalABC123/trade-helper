@@ -1,9 +1,10 @@
-package ru.steamutility.tradehelper;
+package ru.steamutility.tradehelper.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ru.steamutility.tradehelper.TradeHelperApp;
 
 import java.net.URL;
 import java.util.ResourceBundle;

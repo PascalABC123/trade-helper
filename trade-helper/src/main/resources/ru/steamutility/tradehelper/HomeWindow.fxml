@@ -3,5 +3,5 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.HomeWindowController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.controller.HomeWindowController">
 </VBox>

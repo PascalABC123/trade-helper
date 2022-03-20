@@ -7,6 +7,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import ru.steamutility.tradehelper.common.Config;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -31,24 +32,25 @@ public class TradeHelperApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        defaultSceneManager = new SceneManager(stage);
+        defaultSceneManager = new SceneManager(stage, 800, 400);
         handleLaunch();
     }
 
     public void handleLaunch() throws IOException {
-        var sceneManager = new SceneManager(new Stage());
-        sceneManager.invokeLaunchWindow();
+        var launcher = new SceneManager(new Stage(), 400, 320);
+        launcher.invokeLaunchWindow();
 
         var latch = new CountDownLatch(1);
         startupTasksFinished.addListener((observableValue, aBoolean, isFinished) -> {
             if (isFinished) {
                 latch.countDown();
+                status = ApplicationStatus.IS_RUNNING;
             }
         });
 
         startInBackground("Trade Helper Launch", this::backgroundStart);
-        sceneManager.hide();
-        defaultSceneManager.invokeHomeWindow();
+        launcher.hide();
+        defaultSceneManager.invokeSetupWindow();
     }
 
 
@@ -71,5 +73,19 @@ public class TradeHelperApp extends Application {
 
     private void backgroundStart() {
         assert !Platform.isFxApplicationThread(); //Warning
+    }
+
+    private ApplicationStatus status = ApplicationStatus.IS_LAUNCHING;
+
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+
+    public enum ApplicationStatus {
+        IS_LAUNCHING,
+        IS_RUNNING,
+        IS_INTERRUPTED,
+        IS_STOPPED,
+        IS_EXITING;
     }
 }

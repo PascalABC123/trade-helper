@@ -12,4 +12,6 @@ module ru.steamutility.tradehelper {
 
     opens ru.steamutility.tradehelper to javafx.fxml;
     exports ru.steamutility.tradehelper;
+    exports ru.steamutility.tradehelper.controller;
+    opens ru.steamutility.tradehelper.controller to javafx.fxml;
 }

@@ -3,7 +3,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.LoadingController">
+<VBox alignment="CENTER" prefHeight="320.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.controller.LoadingController">
     <children>
         <ImageView fx:id="loadingWheel" pickOnBounds="true" preserveRatio="true" />
     </children>
