@@ -1,32 +1,62 @@
 package ru.steamutility.tradehelper.controller;
 
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.HBox;
-import ru.steamutility.tradehelper.AppPlatform;
+import ru.steamutility.tradehelper.CSGOMarketApiClient;
+import ru.steamutility.tradehelper.Economy;
+import ru.steamutility.tradehelper.SceneManager;
+import ru.steamutility.tradehelper.TradeHelperApp;
+import ru.steamutility.tradehelper.common.Config;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SetupWindowController implements Initializable {
-    @FXML
-    private HBox marketApiBox;
 
     @FXML
     private Label marketApiLabel;
 
     @FXML
-    private PasswordField marketApiKey;
+    private PasswordField marketApiKeyField;
+
+    @FXML
+    private Label currencyLabel;
+
+    @FXML
+    private ChoiceBox<Economy.Currency> currencyChoice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String marketApiKey;
-        int currency;
+        marketApiLabel.setText("CSGO market api key");
+        currencyLabel.setText("Application default currency");
 
+        String marketApiKey = Config.getProperty("marketApiKey");
+        int currency = Config.getPropertyInt("currency");
+        if(currency == -1) currency = 0;
+
+        marketApiKeyField.setText(marketApiKey);
+        currencyChoice.setValue(Economy.Currency.values()[currency]);
+        for(var c : Economy.Currency.values()) {
+            currencyChoice.getItems().add(c);
+        }
+    }
+
+    @FXML
+    private void parseData() {
+        String key = marketApiKeyField.getText();
+        if(CSGOMarketApiClient.isKeyValid(key)) {
+            TradeHelperApp.getSingleton().getDefaultSceneManager().invoke(SceneManager.WINDOW.HOME_MENU);
+            Config.setProperty("marketApiKey", key);
+            Config.setProperty("currency", String.valueOf(currencyChoice.getValue().ordinal()));
+        }
+        else {
+            MessageBox.alert("Wrong market api key!");
+        }
     }
 }

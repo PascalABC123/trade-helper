@@ -14,7 +14,7 @@ public class AppPlatform {
         return applicationDataFolder;
     }
 
-    public static synchronized String getConfigPath() {
+    public static String getConfigPath() {
         return configPath;
     }
 }

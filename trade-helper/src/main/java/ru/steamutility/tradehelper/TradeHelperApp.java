@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import ru.steamutility.tradehelper.common.Config;
+import ru.steamutility.tradehelper.controller.MessageBox;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -20,6 +21,10 @@ public class TradeHelperApp extends Application {
     private final BooleanBinding startupTasksFinished = Bindings.isEmpty(startupTasks);
 
     private SceneManager defaultSceneManager;
+
+    public SceneManager getDefaultSceneManager() {
+        return defaultSceneManager;
+    }
 
     public static TradeHelperApp getSingleton() {
         return singleton;
@@ -36,10 +41,7 @@ public class TradeHelperApp extends Application {
         handleLaunch();
     }
 
-    public void handleLaunch() throws IOException {
-        var launcher = new SceneManager(new Stage(), 400, 320);
-        launcher.invokeLaunchWindow();
-
+    public void handleLaunch() {
         var latch = new CountDownLatch(1);
         startupTasksFinished.addListener((observableValue, aBoolean, isFinished) -> {
             if (isFinished) {
@@ -49,8 +51,6 @@ public class TradeHelperApp extends Application {
         });
 
         startInBackground("Trade Helper Launch", this::backgroundStart);
-        launcher.hide();
-        defaultSceneManager.invokeSetupWindow();
     }
 
 
@@ -72,7 +72,14 @@ public class TradeHelperApp extends Application {
     }
 
     private void backgroundStart() {
-        assert !Platform.isFxApplicationThread(); //Warning
+        if(Config.isUnset()) {
+            defaultSceneManager.invoke(SceneManager.WINDOW.SETUP_MENU);
+        }
+        if(!CSGOMarketApiClient.isKeyValid(Config.getProperty("marketApiKey"))) {
+            defaultSceneManager.invoke(SceneManager.WINDOW.SETUP_MENU);
+            defaultSceneManager.invoke(SceneManager.WINDOW.SETUP_MENU);
+            MessageBox.alert("Wrong market api key");
+        }
     }
 
     private ApplicationStatus status = ApplicationStatus.IS_LAUNCHING;

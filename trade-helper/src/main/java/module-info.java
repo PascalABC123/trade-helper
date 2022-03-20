@@ -9,6 +9,8 @@ module ru.steamutility.tradehelper {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires org.testng;
+    requires org.json;
 
     opens ru.steamutility.tradehelper to javafx.fxml;
     exports ru.steamutility.tradehelper;
