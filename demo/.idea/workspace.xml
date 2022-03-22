@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="74cf8656-7cb3-4fae-bc5c-97ccbda4fcab" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ar_com_hjg_pngj_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_wendykierp_JTransforms_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_ibm_icu_icu4j_65_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_codecentric_centerdevice_javafxsvg_1_3_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_gsi_chart_chartfx_chart_11_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_gsi_dataset_chartfx_dataset_11_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_gsi_math_chartfx_math_11_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_3_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_anim_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_awt_util_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_bridge_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_css_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_dom_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_ext_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_gvt_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_parser_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_script_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svg_dom_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svggen_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_transcoder_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_util_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_xml_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_xmlgraphics_commons_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_controlsfx_controlsfx_11_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_17_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_0_alpha0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__pl_edu_icm_JLargeArrays_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_xalan_2_7_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_3_04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_ext_1_3_04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__ar_com_hjg_pngj_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__com_github_wendykierp_JTransforms_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__com_ibm_icu_icu4j_65_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__de_gsi_chart_chartfx_chart_11_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__de_gsi_dataset_chartfx_dataset_11_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__de_gsi_math_chartfx_math_11_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_jetbrains_annotations_21_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_fontawesome5_pack_11_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_fontawesome_pack_11_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_openjfx_javafx_base_13_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_openjfx_javafx_base_win_13_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__pl_edu_icm_JLargeArrays_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/ikonli_core_12_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/lib/ikonli-core-12.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/common/UsdRateHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/USDGraphWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/USDGraphWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_core_12_2_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_kordamp_ikonli_ikonli_core_12_3_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_openjfx_javafx_base_17_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_13_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/.idea/libraries/Maven__org_openjfx_javafx_base_win_17_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_13_0_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/Economy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/Economy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/TradeHelperApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/TradeHelperApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/common/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/common/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/HomeWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/HomeWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/MessageBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/MessageBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/SetupWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/controller/SetupWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/java/ru/steamutility/tradehelper/util/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/HomeWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/HomeWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/MessageBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/MessageBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/SetupWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/main/resources/ru/steamutility/tradehelper/SetupWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/src/test/java/ru/steamutility/tradehelper/ExampleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/src/test/java/ru/steamutility/tradehelper/ExampleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/Economy$Currency.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/Economy$Currency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/Economy.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/Economy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/HomeWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/HomeWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/MessageBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/MessageBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager$WINDOW.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager$WINDOW.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SceneManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SetupWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/SetupWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/TradeHelperApp$ApplicationStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/TradeHelperApp$ApplicationStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/TradeHelperApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/TradeHelperApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/common/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/common/Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/HomeWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/HomeWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/MessageBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/MessageBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/SetupWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/controller/SetupWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/util/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/classes/ru/steamutility/tradehelper/util/Util.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/target/test-classes/ru/steamutility/tradehelper/ExampleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/target/test-classes/ru/steamutility/tradehelper/ExampleTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../trade-helper/trade-helper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../trade-helper/trade-helper.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26huYVV0h2t3ZSCrrpraE9i4e4W" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/chart-fx" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo.HelloApplication" />
+      <module name="demo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74cf8656-7cb3-4fae-bc5c-97ccbda4fcab" name="Changes" comment="" />
+      <created>1647888192831</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647888192831</updated>
+      <workItem from="1647888194225" duration="383000" />
+      <workItem from="1647889484284" duration="1062000" />
+      <workItem from="1647891375100" duration="427000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

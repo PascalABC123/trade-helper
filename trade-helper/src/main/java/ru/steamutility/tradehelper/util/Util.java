@@ -1,8 +1,28 @@
 package ru.steamutility.tradehelper.util;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.control.Skinnable;
+import javafx.scene.layout.Region;
 import javafx.util.Pair;
 
 public class Util {
+
+    public static double parseDouble(String d) {
+        int comma = 0;
+        for (int i = 0; i < d.length(); i++) {
+            if (d.charAt(i) == ',')
+                comma++;
+        }
+        boolean hasPoint = d.contains(".");
+        if (comma == 1 && !hasPoint)
+            d = d.replaceAll(",", ".").trim();
+        if (comma > 1 || hasPoint)
+            d = d.replaceAll(",", "").trim();
+        return Double.parseDouble(d);
+    }
 
     /*
      * Config

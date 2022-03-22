@@ -1,9 +1,7 @@
 package ru.steamutility.tradehelper.controller;
 
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -13,7 +11,6 @@ import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
 import ru.steamutility.tradehelper.common.Config;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,7 +48,7 @@ public class SetupWindowController implements Initializable {
     private void parseData() {
         String key = marketApiKeyField.getText();
         if(CSGOMarketApiClient.isKeyValid(key)) {
-            TradeHelperApp.getSingleton().getDefaultSceneManager().invoke(SceneManager.WINDOW.HOME_MENU);
+            TradeHelperApp.getDefaultSceneManager().invoke(SceneManager.Window.HOME_MENU);
             Config.setProperty("marketApiKey", key);
             Config.setProperty("currency", String.valueOf(currencyChoice.getValue().ordinal()));
         }

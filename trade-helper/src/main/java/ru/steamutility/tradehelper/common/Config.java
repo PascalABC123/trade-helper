@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.Objects;
 
 public class Config {
-    private static File config = new File(AppPlatform.getConfigPath());
+    private static final File config = new File(AppPlatform.getConfigPath());
     private static boolean unset = false;
 
     public static boolean isUnset() {
@@ -27,11 +27,11 @@ public class Config {
 
     public static String getProperty(String property) {
         String value = null;
-        try(BufferedReader br = new BufferedReader(new FileReader(config))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(config))) {
             String s;
-            while((s = br.readLine()) != null) {
+            while ((s = br.readLine()) != null) {
                 Pair<String, String> res = Util.getPropertyPair(s);
-                if(Objects.requireNonNull(res).getKey().equalsIgnoreCase(property)) {
+                if (Objects.requireNonNull(res).getKey().equalsIgnoreCase(property)) {
                     value = res.getValue();
                     break;
                 }
@@ -66,20 +66,21 @@ public class Config {
         unset = false;
         boolean found = false;
         File temp = new File(AppPlatform.getConfigPath() + ".tmp");
-        try(var br = new BufferedReader(new FileReader(config));
-            var bw = new BufferedWriter(new FileWriter(temp))) {
+        try (var br = new BufferedReader(new FileReader(config));
+             var bw = new BufferedWriter(new FileWriter(temp))) {
             temp.createNewFile();
-            while(br.ready()) {
+            while (br.ready()) {
                 String s = br.readLine();
                 var p = Util.getPropertyPair(s);
-                if(p.getKey().equalsIgnoreCase(property)) {
+                if (p.getKey().equalsIgnoreCase(property)) {
                     found = true;
                     s = Util.replacePropertyValue(s, value);
                 }
+                assert s != null;
                 bw.write(s);
                 bw.newLine();
             }
-            if(!found) {
+            if (!found) {
                 bw.write(Util.makePropertyPair(property, value));
             }
         } catch (IOException e) {

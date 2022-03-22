@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" minHeight="400.0" minWidth="800.0" prefHeight="400.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.controller.SetupWindowController">
+<VBox alignment="CENTER" minHeight="400.0" minWidth="800.0" prefHeight="400.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/13.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.steamutility.tradehelper.controller.SetupWindowController">
    <children>
-      <HBox minWidth="800.0" fx:id="marketApiBox" alignment="CENTER" spacing="20.0">
+      <HBox fx:id="marketApiBox" alignment="CENTER" minWidth="800.0" spacing="20.0">
          <children>
             <Label fx:id="marketApiLabel" text="Label" />
-            <PasswordField fx:id="marketApiKeyField" />
+            <PasswordField fx:id="marketApiKeyField">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></PasswordField>
          </children>
       </HBox>
       <HBox fx:id="currencyBox" alignment="CENTER" spacing="20.0">
          <children>
             <Label fx:id="currencyLabel" text="Label" />
-            <ChoiceBox fx:id="currencyChoice" prefWidth="150.0" />
+            <ChoiceBox fx:id="currencyChoice" prefWidth="150.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ChoiceBox>
          </children></HBox>
-      <Button fx:id="okButton" onAction="#parseData" mnemonicParsing="false" text="OK" />
+      <Button fx:id="okButton" mnemonicParsing="false" onAction="#parseData" text="OK">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </VBox>
