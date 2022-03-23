@@ -1,10 +1,7 @@
 package ru.steamutility.tradehelper.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -13,26 +10,25 @@ import javafx.scene.paint.Color;
 import ru.steamutility.tradehelper.Economy;
 import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
-import ru.steamutility.tradehelper.annotations.AutoResizeable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeWindowController implements Initializable {
 
-    @AutoResizeable
+    @WidthAutoResizeable
     @FXML
     public AnchorPane anchorPane;
 
-    @AutoResizeable
+    @WidthAutoResizeable
     @FXML
     public AnchorPane topPane;
 
-    @AutoResizeable
+    @WidthAutoResizeable
     @FXML
     public VBox vBox;
 
-    @AutoResizeable
+    @WidthAutoResizeable
     @FXML
     public ScrollPane scrollPane;
 

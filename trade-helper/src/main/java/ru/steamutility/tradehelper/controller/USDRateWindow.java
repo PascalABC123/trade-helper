@@ -1,80 +1,98 @@
 package ru.steamutility.tradehelper.controller;
 
+import de.gsi.chart.renderer.LineStyle;
+import de.gsi.chart.renderer.spi.ErrorDataSetRenderer;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+
 import de.gsi.chart.XYChart;
 import de.gsi.chart.axes.AxisLabelOverlapPolicy;
 import de.gsi.chart.axes.spi.DefaultNumericAxis;
+import de.gsi.chart.plugins.DataPointTooltip;
+import de.gsi.chart.plugins.EditAxis;
 import de.gsi.chart.plugins.Zoomer;
 import de.gsi.dataset.spi.DefaultErrorDataSet;
 import de.gsi.dataset.utils.ProcessingProfiler;
-import javafx.application.Platform;
-import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
-import ru.steamutility.tradehelper.annotations.AutoResizeable;
+import ru.steamutility.tradehelper.common.USDRateHistory;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TreeMap;
 
 public class USDRateWindow {
-    @AutoResizeable
-    public static final AnchorPane root = new AnchorPane();
+    private static final StringConverter<Number> formatter = new StringConverter<Number>() {
+        @Override
+        public String toString(Number number) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            long time = number.longValue() * 1000;
+            return sdf.format(new Date(time));
+        }
 
-    @AutoResizeable
+        @Override
+        public Number fromString(String s) {
+            return null;
+        }
+    };
+
+    @HeightAutoResizeable(height = 0.9)
+    @WidthAutoResizeable(width = 0.97)
     public static XYChart chart;
 
-    private static final int N_SAMPLES = 10_000; // default: 10000
-
-    private static void generateData(final DefaultErrorDataSet dataSet) {
-        final long startTime = ProcessingProfiler.getTimeStamp();
-
-        dataSet.autoNotification().set(false);
-        dataSet.clearData();
-        final double now = System.currentTimeMillis() / 1000.0 + 1; // N.B. '+1'
-        // to check
-        // for
-        // resolution
-        for (int n = 0; n < USDRateWindow.N_SAMPLES; n++) {
-            double t = now + n * 10;
-            t *= +1;
-            final double y = 100 * Math.cos(Math.PI * t * 0.0005) + 0 * 0.001 * (t - now) + 0 * 1e4;
-            final double ex = 0.1;
-            final double ey = 10;
-            dataSet.add(t, y, ex, ey);
-        }
-        dataSet.autoNotification().set(true);
-
-        Platform.runLater(() -> dataSet.fireInvalidated(null));
-        ProcessingProfiler.getTimeDiff(startTime, "adding data into DataSet");
-    }
-
-    public static void initChart() {
-    }
-
     public static void requestOpen() {
-        final DefaultNumericAxis xAxis = new DefaultNumericAxis("time", "date");
-        xAxis.setOverlapPolicy(AxisLabelOverlapPolicy.SKIP_ALT);
-        final DefaultNumericAxis yAxis = new DefaultNumericAxis("rate", "rub.");
+        final AnchorPane root = new AnchorPane();
+        Button goBack = SceneManager.getGoBackButton();
+        root.getChildren().add(goBack);
 
-        chart = new XYChart(xAxis, yAxis);
+        ProcessingProfiler.setVerboseOutputState(true);
+        ProcessingProfiler.setLoggerOutputState(true);
+        ProcessingProfiler.setDebugState(false);
+
+        final DefaultNumericAxis xAxis1 = new DefaultNumericAxis("time", "date");
+        xAxis1.setOverlapPolicy(AxisLabelOverlapPolicy.SKIP_ALT);
+        final DefaultNumericAxis yAxis1 = new DefaultNumericAxis("rate", "rub.");
+
+        final var dpt = new DataPointTooltip();
+        dpt.setXValueFormatter(formatter);
+
+        chart = new XYChart(xAxis1, yAxis1);
         chart.legendVisibleProperty().set(true);
         chart.getPlugins().add(new Zoomer());
+        chart.getPlugins().add(new EditAxis());
+        chart.getPlugins().add(dpt);
         chart.setAnimated(false);
 
-        xAxis.setAutoRangeRounding(false);
-        xAxis.setTimeAxis(true);
-        yAxis.setAutoRangeRounding(true);
+        xAxis1.setAutoRangeRounding(false);
+        xAxis1.setTimeAxis(true);
+        yAxis1.setAutoRangeRounding(true);
 
-        final DefaultErrorDataSet dataSet = new DefaultErrorDataSet("USDRate");
+        final DefaultErrorDataSet dataSet = new DefaultErrorDataSet("Rate");
 
-        generateData(dataSet);
+        final TreeMap<Date, Double> data = USDRateHistory.getUniqueRecords();
+        for(Date d : data.keySet()) {
+            double t = d.getTime() / 1000.0;
+            dataSet.add(t, data.get(d), 0.1, 0.0);
+        }
+
+        final ErrorDataSetRenderer renderer1 = new ErrorDataSetRenderer();
+        renderer1.setPolyLineStyle(LineStyle.BEZIER_CURVE);
+        chart.getRenderers().add(renderer1);
+        renderer1.getDatasets().addAll(dataSet);
 
         long startTime = ProcessingProfiler.getTimeStamp();
-        chart.getDatasets().add(dataSet);
         ProcessingProfiler.getTimeDiff(startTime, "adding data to chart");
 
         startTime = ProcessingProfiler.getTimeStamp();
-        root.getChildren().add(chart);
-        ProcessingProfiler.getTimeDiff(startTime, "adding chart into StackPane");
-
-        startTime = ProcessingProfiler.getTimeStamp();
-        ProcessingProfiler.getTimeDiff(startTime, "for showing");
+        //root.getChildren().add(chart);
+        ProcessingProfiler.getTimeDiff(startTime, "adding chart into AnchorPane");
 
         TradeHelperApp.getDefaultSceneManager().openPage(root, USDRateWindow.class);
+        ProcessingProfiler.getTimeDiff(startTime, "for showing");
     }
 }

@@ -5,19 +5,12 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ru.steamutility.tradehelper.annotations.Annotations;
-import ru.steamutility.tradehelper.annotations.AutoResizeable;
 import ru.steamutility.tradehelper.common.Config;
-import ru.steamutility.tradehelper.common.UsdRateHistory;
+import ru.steamutility.tradehelper.common.USDRateHistory;
 import ru.steamutility.tradehelper.controller.MessageBox;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.concurrent.CountDownLatch;
 
 public class TradeHelperApp extends Application {
@@ -91,7 +84,7 @@ public class TradeHelperApp extends Application {
         else {
             defaultSceneManager.invoke(SceneManager.Window.HOME_MENU);
         }
-        UsdRateHistory.makeRecord();
+        USDRateHistory.makeRecord();
     }
 
     private ApplicationStatus status = ApplicationStatus.IS_LAUNCHING;

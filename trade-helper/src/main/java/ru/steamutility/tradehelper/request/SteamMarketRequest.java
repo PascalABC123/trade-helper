@@ -18,11 +18,7 @@ public class SteamMarketRequest {
             }
         }
         JSONObject res = null;
-        try {
-            res = new JSONObject(Requests.makeRequest(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        res = new JSONObject(Requests.makeSafeRequest(path));
         return res;
     }
 }

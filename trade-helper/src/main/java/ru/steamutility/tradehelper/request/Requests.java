@@ -4,11 +4,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
 public class Requests {
     private static final int connectTimeout = 1000;
     private static final int readTimeout = 1000;
+
+    public static String makeSafeRequest(String path) {
+        int cnt = 50;
+        String res = null;
+        while(cnt-- > 0) {
+            boolean successful = true;
+            try {
+                res = makeRequest(path);
+            } catch (IOException e) {
+                successful = false;
+            }
+            if(successful)
+                break;
+        }
+        return res;
+
+    }
 
     public static String makeRequest(String path) throws IOException {
         String res = null;

@@ -8,7 +8,18 @@ import javafx.scene.control.Skinnable;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
 
+import java.util.Date;
+
 public class Util {
+    private Util() {
+
+    }
+
+    public static boolean areDatesEqualByDay(Date d1, Date d2) {
+        return d1.getDay() == d2.getDay() &&
+                d1.getMonth() == d2.getMonth() &&
+                d1.getYear() == d2.getYear();
+    }
 
     public static double parseDouble(String d) {
         int comma = 0;
