@@ -1,5 +1,6 @@
 package ru.steamutility.tradehelper;
 
+import ru.steamutility.tradehelper.common.Config;
 import ru.steamutility.tradehelper.request.CSGOMarketRequest;
 import ru.steamutility.tradehelper.request.WrongApiKeyException;
 
@@ -19,6 +20,10 @@ public class CSGOMarketApiClient {
     public static synchronized CSGOMarketApiClient getSingleton() {
         if(singleton == null) singleton = new CSGOMarketApiClient();
         return singleton;
+    }
+
+    public static boolean isConfigKeyValid() {
+        return isKeyValid(Config.getProperty("marketApiKey"));
     }
 
     public static boolean isKeyValid(String key) {

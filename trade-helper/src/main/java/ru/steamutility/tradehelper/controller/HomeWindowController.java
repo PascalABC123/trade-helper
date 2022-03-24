@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import ru.steamutility.tradehelper.Economy;
 import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
@@ -60,13 +61,8 @@ public class HomeWindowController implements Initializable {
 
     @FXML
     private void requestUSDGraph() {
-        USDRateWindow.requestOpen();
-    }
-
-    private void setElementsWidth(double width) {
-        anchorPane.setPrefWidth(width);
-        vBox.setPrefWidth(width);
-        topPane.setPrefWidth(width);
+        SceneManager sm = new SceneManager(new Stage(), 800, 400);
+        sm.invoke(SceneManager.Window.USD_CHART);
     }
 
     @Override
@@ -76,7 +72,5 @@ public class HomeWindowController implements Initializable {
             usdRateLabel.setTextFill(Color.rgb(198, 84, 80));
         else
             usdRateLabel.setTextFill(Color.rgb(73, 155, 84));
-        //TradeHelperApp.getDefaultSceneManager().getStage().widthProperty().addListener(
-                //(observableValue, number, newSceneWidth) -> setElementsWidth((Double) newSceneWidth));
     }
 }

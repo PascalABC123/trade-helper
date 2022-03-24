@@ -10,7 +10,6 @@ import ru.steamutility.tradehelper.common.Config;
 import ru.steamutility.tradehelper.common.USDRateHistory;
 import ru.steamutility.tradehelper.controller.MessageBox;
 
-import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 public class TradeHelperApp extends Application {
@@ -34,10 +33,12 @@ public class TradeHelperApp extends Application {
     public TradeHelperApp() {
         assert singleton == null;
         singleton = this;
+
+        java.beans.Beans.setDesignTime(true);
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         defaultSceneManager = new SceneManager(stage, 800, 400);
         handleLaunch();
     }
@@ -47,7 +48,6 @@ public class TradeHelperApp extends Application {
         startupTasksFinished.addListener((observableValue, aBoolean, isFinished) -> {
             if (isFinished) {
                 latch.countDown();
-                status = ApplicationStatus.IS_RUNNING;
             }
         });
 
@@ -56,6 +56,7 @@ public class TradeHelperApp extends Application {
 
 
     private void startInBackground(String taskName, Runnable task) {
+        assert task != null;
         var t = new Thread(() -> {
             task.run();
 
@@ -73,31 +74,17 @@ public class TradeHelperApp extends Application {
     }
 
     private void backgroundStart() {
-        Annotations.initAll();
+        USDRateHistory.requestRecord();
+
         if(Config.isUnset()) {
             defaultSceneManager.invoke(SceneManager.Window.SETUP_MENU);
         }
-        else if(!CSGOMarketApiClient.isKeyValid(Config.getProperty("marketApiKey"))) {
+        else if(!CSGOMarketApiClient.isConfigKeyValid()) {
             defaultSceneManager.invoke(SceneManager.Window.SETUP_MENU);
             MessageBox.alert("Wrong market api key");
         }
         else {
             defaultSceneManager.invoke(SceneManager.Window.HOME_MENU);
         }
-        USDRateHistory.makeRecord();
-    }
-
-    private ApplicationStatus status = ApplicationStatus.IS_LAUNCHING;
-
-    public ApplicationStatus getStatus() {
-        return status;
-    }
-
-    public enum ApplicationStatus {
-        IS_LAUNCHING,
-        IS_RUNNING,
-        IS_INTERRUPTED,
-        IS_STOPPED,
-        IS_EXITING;
     }
 }

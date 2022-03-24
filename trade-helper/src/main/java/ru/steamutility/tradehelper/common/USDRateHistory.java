@@ -2,24 +2,26 @@ package ru.steamutility.tradehelper.common;
 
 import ru.steamutility.tradehelper.AppPlatform;
 import ru.steamutility.tradehelper.Economy;
-import ru.steamutility.tradehelper.controller.USDRateWindow;
 import ru.steamutility.tradehelper.util.Util;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.TreeMap;
 
 public class USDRateHistory {
-    private static final File file = new File(AppPlatform.getApplicationDataFolder() + "\\usd");
+    private static final Path file = Path.of(AppPlatform.getApplicationDataFolder() + "\\usd");
     private static final SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
     static {
-        if (!file.exists()) {
+        if (!Files.exists(file)) {
             try {
-                file.createNewFile();
+                Files.createFile(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -28,7 +30,7 @@ public class USDRateHistory {
 
     public static double getUsdRateByDate(Date date) {
         double ans = 0;
-        try (var br = new BufferedReader(new FileReader(file))) {
+        try (var br = new BufferedReader(new FileReader(String.valueOf(file)))) {
             while (br.ready()) {
                 String[] res = br.readLine().split(" -- ");
                 if(res.length == 2) {
@@ -44,19 +46,24 @@ public class USDRateHistory {
         return ans;
     }
 
-    public static void makeRecord() {
-        try (var bw = new BufferedWriter(new FileWriter(file, true))) {
-            bw.write(String.format("\n%s -- %s", df.format(new Date()), Economy.getUSDRateString()));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void requestRecord() {
+        final Date now = new Date();
+        if(getUsdRateByDate(now) == 0) {
+            try {
+                String s = String.format("%s -- %s\n", df.format(now), Economy.getUSDRateString());
+                Files.write(file, s.getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static TreeMap<Date, Double> getUniqueRecords() {
+    public static TreeMap<Date, Double> getSortedRecords() {
         final TreeMap<Date, Double> records = new TreeMap<>();
-        try (var br = new BufferedReader(new FileReader(file))) {
-            while(br.ready()) {
-                String[] s = br.readLine().split(" -- ");
+        try {
+            List<String> lines = Files.readAllLines(file);
+            for(String l : lines) {
+                String[] s = l.split(" -- ");
                 if (s.length == 2) {
                     Date date = df.parse(s[0]);
                     date.setHours(0);

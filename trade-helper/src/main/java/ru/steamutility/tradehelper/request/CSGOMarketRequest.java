@@ -3,24 +3,20 @@ package ru.steamutility.tradehelper.request;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Objects;
 
-public class CSGOMarketRequest {
-    String apiKey;
-
+public record CSGOMarketRequest(String apiKey) {
     public enum RequestType {
         GET_MONEY;
     }
 
-    public CSGOMarketRequest(String apiKey) {
-        this.apiKey = apiKey;
-    }
+    private static final String marketApiBaseUrl = "https://market.csgo.com/api/";
+    private static final String marketV2ApiBaseUrl = marketApiBaseUrl + "v2/";
 
     public JSONObject makeRequest(RequestType requestType) throws WrongApiKeyException {
         String path = null;
         switch (requestType) {
             case GET_MONEY -> {
-                path = "https://market.csgo.com/api/v2/get-money?key=" + apiKey;
+                path = marketV2ApiBaseUrl + "get-money?key=" + apiKey;
             }
         }
         JSONObject res;
@@ -29,7 +25,7 @@ public class CSGOMarketRequest {
         } catch (IOException e) {
             throw new WrongApiKeyException();
         }
-        if(!res.getBoolean("success"))
+        if (!res.getBoolean("success"))
             throw new WrongApiKeyException();
         return res;
     }

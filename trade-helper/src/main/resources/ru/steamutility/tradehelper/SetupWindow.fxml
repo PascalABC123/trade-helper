@@ -8,7 +8,7 @@
    <children>
       <HBox fx:id="marketApiBox" alignment="CENTER" minWidth="800.0" spacing="20.0">
          <children>
-            <Label fx:id="marketApiLabel" text="Label" />
+            <Label fx:id="marketApiLabel" text="CSGO market api key" />
             <PasswordField fx:id="marketApiKeyField">
                <cursor>
                   <Cursor fx:constant="TEXT" />
@@ -17,7 +17,7 @@
       </HBox>
       <HBox fx:id="currencyBox" alignment="CENTER" spacing="20.0">
          <children>
-            <Label fx:id="currencyLabel" text="Label" />
+            <Label fx:id="currencyLabel" text="Application default currency" />
             <ChoiceBox fx:id="currencyChoice" prefWidth="150.0">
                <cursor>
                   <Cursor fx:constant="HAND" />

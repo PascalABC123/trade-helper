@@ -3,95 +3,127 @@ package ru.steamutility.tradehelper;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
+import javafx.collections.ObservableListBase;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SceneManager {
     private final Stage stage;
+
     private Scene scene;
     private FXMLLoader loader;
-
     private boolean pageOpened = false;
-    private Class currentPageClass;
+    private Class<Object> currentPageClass;
 
     public boolean isPageOpened() {
         return pageOpened;
     }
 
-    public Class getCurrentPageClass() {
+    public Class<Object> getCurrentPageClass() {
         return currentPageClass;
     }
 
     public SceneManager(Stage stage, double width, double height) {
+        assert stage != null;
+
         this.stage = stage;
-        stage.setWidth(width);
-        stage.setHeight(height);
         stage.setMinWidth(width);
+        stage.setWidth(width);
         stage.setMinHeight(height);
+        stage.setHeight(height);
+
+        Annotations.initAll(this);
     }
 
-    private ObservableList<Window> stack = FXCollections.observableArrayList();
+    private final ObservableList<Window> stack = FXCollections.observableArrayList();
 
     public enum Window {
         HOME_MENU,
-        SETUP_MENU
+        SETUP_MENU,
+        USD_CHART
     }
 
     public void invoke(Window window) {
         pageOpened = false;
+        fixSize();
         stack.add(window);
+
         Platform.runLater(() -> {
             try {
                 loader = new FXMLLoader();
+
                 switch (window) {
-                    case HOME_MENU -> loader.setLocation(TradeHelperApp.class.getResource("HomeWindow.fxml"));
-                    case SETUP_MENU -> loader.setLocation(TradeHelperApp.class.getResource("SetupWindow.fxml"));
+                    case HOME_MENU ->
+                            loader.setLocation(TradeHelperApp.class.getResource("HomeWindow.fxml"));
+                    case SETUP_MENU ->
+                            loader.setLocation(TradeHelperApp.class.getResource("SetupWindow.fxml"));
+                    case USD_CHART ->
+                            loader.setLocation(TradeHelperApp.class.getResource("USDChartWindow.fxml"));
                 }
+
                 scene = new Scene(loader.load(), stage.getWidth(), stage.getHeight());
                 stage.setTitle(AppPlatform.APP_NAME);
                 stage.setScene(scene);
                 stage.show();
-                stage.setWidth(stage.getWidth() - 1); // Application resizing prevents bugs (elements shifting down)
+
+                //TODO Application resizing prevents bugs (elements shifting down)
+                stage.setWidth(stage.getWidth() - 1);
+                stage.setHeight(stage.getHeight() - 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public void openPage(Parent root, Class controller) {
+    public void openPage(Parent root, Class<Object> controller) {
+        assert root != null && controller != null;
         currentPageClass = controller;
+
         pageOpened = true;
+
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+
         stage.setScene(scene);
-        stage.setWidth(stage.getWidth() - 1);
-        stage.setHeight(stage.getHeight() - 1);
+    }
+
+    private void fixSize() {
+        if(stage.getWidth() < 800)
+            stage.setWidth(800);
+        if(stage.getHeight() < 400)
+            stage.setHeight(400);
     }
 
     public void hide() {
         Platform.runLater(stage::hide);
     }
 
-    private static final Button goBack;
+    private static final Label goBack;
 
     static {
-        goBack = new Button();
-        Image img = new Image(Objects.requireNonNull(TradeHelperApp.class.getResourceAsStream("go_back.png")));
-        goBack.setGraphic(new ImageView(img));
-        goBack.setMaxWidth(5);
-        goBack.setMaxHeight(5);
-        goBack.setOnAction(actionEvent -> {
+        goBack = new Label();
+
+        goBack.setText("\uD83E\uDC14");
+        goBack.setFont(Font.font(25));
+        goBack.setTextFill(Color.rgb(20,20,20));
+        goBack.setCursor(Cursor.HAND);
+
+        goBack.onMouseEnteredProperty().set(actionEvent -> {
+            goBack.setTextFill(Color.rgb(55, 55, 255));
+        });
+
+        goBack.onMouseExitedProperty().set(actionEvent -> {
+            goBack.setTextFill(Color.rgb(20,20,20));
+        });
+
+        goBack.onMouseClickedProperty().set(actionEvent -> {
             var sm = TradeHelperApp.getDefaultSceneManager();
             if (sm.pageOpened && sm.stack.size() > 0) {
                 sm.invoke(sm.stack.get(sm.stack.size() - 1));
@@ -103,7 +135,7 @@ public class SceneManager {
         });
     }
 
-    public static Button getGoBackButton() {
+    public static Label getGoBackButton() {
         return goBack;
     }
 

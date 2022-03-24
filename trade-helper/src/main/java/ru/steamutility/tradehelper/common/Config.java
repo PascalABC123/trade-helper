@@ -5,10 +5,13 @@ import ru.steamutility.tradehelper.AppPlatform;
 import ru.steamutility.tradehelper.util.Util;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 
 public class Config {
-    private static final File config = new File(AppPlatform.getConfigPath());
+    private static final Path config = Path.of(AppPlatform.getConfigPath());
     private static boolean unset = false;
 
     public static boolean isUnset() {
@@ -16,77 +19,74 @@ public class Config {
     }
 
     static {
-        if (!config.exists()) {
+        if (!Files.exists(config)) {
             unset = true;
             try {
-                config.createNewFile();
-            } catch (IOException ignored) {
+                Files.createFile(config);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
+    /**
+     * Returns null if not found.
+     */
     public static String getProperty(String property) {
         String value = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(config))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                Pair<String, String> res = Util.getPropertyPair(s);
+        try {
+            final List<String> lines = Files.readAllLines(config);
+            for(String l : lines) {
+                Pair<String, String> res = Util.getPropertyPair(l);
                 if (Objects.requireNonNull(res).getKey().equalsIgnoreCase(property)) {
                     value = res.getValue();
                     break;
                 }
             }
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return value; // return null if property not found
+        return value;
     }
 
+    /**
+     * Returns -1 if not found.
+     */
     public static int getPropertyInt(String property) {
         String s = getProperty(property);
         int res = -1;
         try {
             res = Integer.parseInt(s);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return res;
     }
 
     public static double getPropertyDouble(String property) {
         String s = getProperty(property);
-        double res = 0;
-        try {
-            s = s.replaceAll(",", ".");
-            res = Double.parseDouble(s);
-        } catch (Exception ignored) {
-        }
-        return res;
+        return Util.parseDouble(s);
     }
 
-    public static void setProperty(String property, String value) {
-        unset = false;
-        boolean found = false;
-        File temp = new File(AppPlatform.getConfigPath() + ".tmp");
-        try (var br = new BufferedReader(new FileReader(config));
-             var bw = new BufferedWriter(new FileWriter(temp))) {
-            temp.createNewFile();
-            while (br.ready()) {
-                String s = br.readLine();
-                var p = Util.getPropertyPair(s);
-                if (p.getKey().equalsIgnoreCase(property)) {
+    public static void setProperty(String line, String value) {
+        try {
+            List<String> lines = Files.readAllLines(config);
+            boolean found = false;
+            for(int l = 0; l < lines.size(); l++) {
+                Pair<String, String> p = Util.getPropertyPair(lines.get(l));
+                if(p.getKey().equalsIgnoreCase(line)) {
                     found = true;
-                    s = Util.replacePropertyValue(s, value);
+                    lines.add(Util.replacePropertyValue(lines.get(l), value));
+                    lines.remove(l);
+                    break;
                 }
-                assert s != null;
-                bw.write(s);
-                bw.newLine();
             }
-            if (!found) {
-                bw.write(Util.makePropertyPair(property, value));
+            if(!found) {
+                lines.add(Util.makePropertyPair(line, value));
             }
+            Files.write(config, lines);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        config.delete();
-        temp.renameTo(new File(AppPlatform.getConfigPath()));
     }
 }

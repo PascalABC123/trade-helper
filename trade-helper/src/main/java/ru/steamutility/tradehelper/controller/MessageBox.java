@@ -35,7 +35,8 @@ public class MessageBox implements Initializable {
                 stage.setTitle("Warning");
                 stage.setScene(scene);
                 stage.show();
-            } catch (IOException ignored) {
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }

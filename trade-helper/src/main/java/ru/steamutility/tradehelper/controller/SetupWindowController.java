@@ -17,23 +17,14 @@ import java.util.ResourceBundle;
 public class SetupWindowController implements Initializable {
 
     @FXML
-    private Label marketApiLabel;
-
-    @FXML
     private PasswordField marketApiKeyField;
-
-    @FXML
-    private Label currencyLabel;
 
     @FXML
     private ChoiceBox<Economy.Currency> currencyChoice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        marketApiLabel.setText("CSGO market api key");
-        currencyLabel.setText("Application default currency");
-
-        String marketApiKey = Config.getProperty("marketApiKey");
+        final String marketApiKey = Config.getProperty("marketApiKey");
         int currency = Config.getPropertyInt("currency");
         if(currency == -1) currency = 0;
 
@@ -46,7 +37,7 @@ public class SetupWindowController implements Initializable {
 
     @FXML
     private void parseData() {
-        String key = marketApiKeyField.getText();
+        final String key = marketApiKeyField.getText();
         if(CSGOMarketApiClient.isKeyValid(key)) {
             TradeHelperApp.getDefaultSceneManager().invoke(SceneManager.Window.HOME_MENU);
             Config.setProperty("marketApiKey", key);
