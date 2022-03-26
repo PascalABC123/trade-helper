@@ -79,7 +79,7 @@ public class Util {
         return key + ": " + value;
     }
 
-    public static String makePropertyPair(String key, String value) {
+    public static String makePropertyLine(String key, String value) {
         return "#" + key + ": " + value;
     }
 }

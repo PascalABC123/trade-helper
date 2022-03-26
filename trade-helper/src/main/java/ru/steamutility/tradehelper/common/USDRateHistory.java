@@ -1,7 +1,7 @@
 package ru.steamutility.tradehelper.common;
 
 import ru.steamutility.tradehelper.AppPlatform;
-import ru.steamutility.tradehelper.Economy;
+import ru.steamutility.tradehelper.economy.Economy;
 import ru.steamutility.tradehelper.util.Util;
 
 import java.io.*;

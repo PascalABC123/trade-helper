@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.steamutility.tradehelper.Economy;
+import ru.steamutility.tradehelper.economy.Economy;
 import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
 

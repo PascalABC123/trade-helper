@@ -29,7 +29,7 @@ public class CSGOMarketApiClient {
     public static boolean isKeyValid(String key) {
         var r = new CSGOMarketRequest(key);
         try {
-            r.makeRequest(CSGOMarketRequest.RequestType.GET_MONEY);
+            r.makeRequest(CSGOMarketRequest.RequestType.GET_BALANCE);
             return true;
         } catch (WrongApiKeyException e) {
             return false;

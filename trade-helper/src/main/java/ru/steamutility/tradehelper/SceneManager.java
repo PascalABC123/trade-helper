@@ -31,8 +31,13 @@ public class SceneManager {
         return currentPageClass;
     }
 
+    private final double defaultWidth, defaultHeight;
+
     public SceneManager(Stage stage, double width, double height) {
         assert stage != null;
+
+        defaultWidth = width;
+        defaultHeight = height;
 
         this.stage = stage;
         stage.setMinWidth(width);
@@ -95,10 +100,10 @@ public class SceneManager {
     }
 
     private void fixSize() {
-        if(stage.getWidth() < 800)
-            stage.setWidth(800);
-        if(stage.getHeight() < 400)
-            stage.setHeight(400);
+        if(stage.getWidth() < defaultWidth - 1)
+            stage.setWidth(defaultWidth);
+        if(stage.getHeight() < defaultHeight - 1)
+            stage.setHeight(defaultHeight);
     }
 
     public void hide() {

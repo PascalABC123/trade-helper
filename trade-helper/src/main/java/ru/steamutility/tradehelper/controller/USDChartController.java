@@ -1,7 +1,9 @@
 package ru.steamutility.tradehelper.controller;
 
+import de.gsi.chart.plugins.*;
 import de.gsi.chart.renderer.LineStyle;
 import de.gsi.chart.renderer.spi.ErrorDataSetRenderer;
+import de.gsi.chart.renderer.spi.ReducingLineRenderer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -9,30 +11,45 @@ import javafx.scene.layout.AnchorPane;
 import de.gsi.chart.XYChart;
 import de.gsi.chart.axes.AxisLabelOverlapPolicy;
 import de.gsi.chart.axes.spi.DefaultNumericAxis;
-import de.gsi.chart.plugins.DataPointTooltip;
-import de.gsi.chart.plugins.EditAxis;
-import de.gsi.chart.plugins.Zoomer;
 import de.gsi.dataset.spi.DefaultErrorDataSet;
 import de.gsi.dataset.utils.ProcessingProfiler;
 import javafx.util.StringConverter;
 import ru.steamutility.tradehelper.common.USDRateHistory;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 public class USDChartController implements Initializable {
-    private static final StringConverter<Number> formatter;
+    private static final StringConverter<Number> dateFormatter;
 
     static {
-        formatter = new StringConverter<>() {
+        dateFormatter = new StringConverter<>() {
             @Override
             public String toString(Number number) {
                 var sdf = new SimpleDateFormat("dd.MM.yy");
                 long time = number.longValue() * 1000;
                 return sdf.format(new Date(time));
+            }
+
+            @Override
+            public Number fromString(String s) {
+                return null;
+            }
+        };
+    }
+
+    private static final StringConverter<Number> doubleFormatter;
+
+    static {
+        doubleFormatter = new StringConverter<>() {
+            @Override
+            public String toString(Number number) {
+                var df = new DecimalFormat("#0.00");
+                return df.format((Double) number);
             }
 
             @Override
@@ -60,12 +77,20 @@ public class USDChartController implements Initializable {
         final var yAxis1 = new DefaultNumericAxis("rate", "rub.");
 
         final var dpt = new DataPointTooltip();
-        dpt.setXValueFormatter(formatter);
+        dpt.setXValueFormatter(dateFormatter);
+        dpt.setYValueFormatter(doubleFormatter);
+        dpt.setPickingDistance(5);
 
+        final var ci = new CrosshairIndicator();
+        ci.setXValueFormatter(dateFormatter);
+        ci.setYValueFormatter(doubleFormatter);
+
+        // TODO: small zoom out to see all the chart
         chart = new XYChart(xAxis1, yAxis1);
         chart.legendVisibleProperty().set(true);
+        chart.getPlugins().add(new YRangeIndicator(yAxis1, -100000, 0));
         chart.getPlugins().add(new Zoomer());
-        chart.getPlugins().add(new EditAxis());
+        chart.getPlugins().add(ci);
         chart.getPlugins().add(dpt);
         chart.setAnimated(false);
 
@@ -82,7 +107,8 @@ public class USDChartController implements Initializable {
         }
 
         final var renderer1 = new ErrorDataSetRenderer();
-        renderer1.setPolyLineStyle(LineStyle.BEZIER_CURVE);
+        renderer1.setPolyLineStyle(LineStyle.NORMAL);
+        renderer1.setShowInLegend(false);
         chart.getRenderers().add(renderer1);
         renderer1.getDatasets().addAll(dataSet);
 

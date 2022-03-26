@@ -14,9 +14,12 @@ module ru.steamutility.tradehelper {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.fontawesome;
     requires java.desktop;
+    requires org.jetbrains.annotations;
 
     opens ru.steamutility.tradehelper to javafx.fxml;
     exports ru.steamutility.tradehelper;
     exports ru.steamutility.tradehelper.controller;
     opens ru.steamutility.tradehelper.controller to javafx.fxml;
+    exports ru.steamutility.tradehelper.economy;
+    opens ru.steamutility.tradehelper.economy to javafx.fxml;
 }

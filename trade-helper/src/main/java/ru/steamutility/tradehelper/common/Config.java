@@ -7,6 +7,7 @@ import ru.steamutility.tradehelper.util.Util;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Objects;
 
@@ -57,8 +58,7 @@ public class Config {
         int res = -1;
         try {
             res = Integer.parseInt(s);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return res;
     }
@@ -68,23 +68,23 @@ public class Config {
         return Util.parseDouble(s);
     }
 
-    public static void setProperty(String line, String value) {
-        try {
-            List<String> lines = Files.readAllLines(config);
+    public static void setProperty(String property, String value) {
+        String res = Util.makePropertyLine(property, value) + "\n";
+        try(final var raf = new RandomAccessFile(config.toFile(), "rw")) {
             boolean found = false;
-            for(int l = 0; l < lines.size(); l++) {
-                Pair<String, String> p = Util.getPropertyPair(lines.get(l));
-                if(p.getKey().equalsIgnoreCase(line)) {
+            long pos = 0;
+            while((pos = raf.getFilePointer()) < raf.length()) {
+                String line = raf.readLine();
+                Pair<String, String> p = Util.getPropertyPair(line);
+                if(p.getKey().equalsIgnoreCase(property)) {
                     found = true;
-                    lines.add(Util.replacePropertyValue(lines.get(l), value));
-                    lines.remove(l);
-                    break;
+                    raf.seek(pos);
+                    raf.write(res.getBytes());
                 }
             }
             if(!found) {
-                lines.add(Util.makePropertyPair(line, value));
+                Files.write(config, res.getBytes(), StandardOpenOption.APPEND);
             }
-            Files.write(config, lines);
         } catch (IOException e) {
             e.printStackTrace();
         }

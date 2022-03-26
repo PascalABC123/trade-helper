@@ -1,4 +1,4 @@
-package ru.steamutility.tradehelper;
+package ru.steamutility.tradehelper.economy;
 
 import org.json.JSONObject;
 import ru.steamutility.tradehelper.common.USDRateHistory;
