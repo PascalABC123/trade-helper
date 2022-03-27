@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import ru.steamutility.tradehelper.Refreshable;
 import ru.steamutility.tradehelper.economy.Economy;
 import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
@@ -15,7 +16,7 @@ import ru.steamutility.tradehelper.TradeHelperApp;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeWindowController implements Initializable {
+public class HomeWindowController implements Initializable, Refreshable {
 
     @WidthAutoResizeable
     @FXML
@@ -68,9 +69,14 @@ public class HomeWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usdRateLabel.setText(Economy.getUSDRateString());
-        if(Economy.getUSDDelta() > 0)
+        if (Economy.getUSDDelta() > 0)
             usdRateLabel.setTextFill(Color.rgb(198, 84, 80));
         else
             usdRateLabel.setTextFill(Color.rgb(73, 155, 84));
+    }
+
+    @Override
+    public void refresh() {
+        initialize(null, null);
     }
 }

@@ -5,26 +5,108 @@ import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 
 public class Item implements Comparable {
-    private Items.ItemBaseType baseType;
-    private Items.ItemRarity rarity;
-    private Items.ItemExterior exterior;
+    private ItemBaseType baseType;
+    private ItemRarity rarity;
+    private ItemExterior exterior;
 
+    private boolean stable;
     private URL iconURL;
     private String hashName;
     private double steamPrice, marketPrice;
+    private double steamAvgPrice;
     private double steamMedianPrice, marketMedianPrice;
-    private int steamVolume, marketVolume;
+    private int marketVolume;
+    private int steam24HVolume, steamWeekVolume, steamMonthVolume;
+    private int steamAvgVolume;
     private int steamListings;
+
+    public double getDepositProfit() {
+        return steamPrice / marketPrice;
+    }
+
+    public int getDepositProfitPercent() {
+        return (int) (getDepositProfit() * 100) - 100;
+    }
 
     protected Item() {
 
     }
 
-    public Items.ItemBaseType getBaseType() {
+    @Override
+    public int compareTo(@NotNull Object bean) {
+        return this.hashName.compareTo(((Item) bean).hashName);
+    }
+
+    public enum ItemBaseType {
+        PISTOL,
+        PP,
+        RIFLE,
+        HEAVY,
+        KNIFE,
+        GLOVES,
+        AGENT,
+        CRATE,
+        GRAFFITI,
+        STICKER
+    }
+
+    public enum ItemRarity {
+        CONSUMER,
+        MIL_SPEC,
+        INDUSTRIAL,
+        RESTRICTED,
+        CLASSIFIED,
+        COVERT,
+        BASE,
+        SUPERIOR,
+        DISTINGUISHED,
+        MASTER,
+        EXCEPTIONAL,
+        EXTRAORDINARY,
+        HIGH,
+        REMARKABLE,
+        EXOTIC,
+        CONTRABAND
+    }
+
+    public enum ItemExterior {
+        FACTORY_NEW,
+        MINIMAL_WEAR,
+        FILED_TESTED,
+        WELL_WORN,
+        BATTLE_SCARRED,
+        NOT_PAINTED
+    }
+
+    public ItemRarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(ItemRarity rarity) {
+        this.rarity = rarity;
+    }
+
+    public ItemExterior getExterior() {
+        return exterior;
+    }
+
+    public void setExterior(ItemExterior exterior) {
+        this.exterior = exterior;
+    }
+
+    public boolean isStable() {
+        return stable;
+    }
+
+    public void setStable(boolean stable) {
+        this.stable = stable;
+    }
+
+    public ItemBaseType getBaseType() {
         return baseType;
     }
 
-    public void setBaseType(Items.ItemBaseType baseType) {
+    public void setBaseType(ItemBaseType baseType) {
         this.baseType = baseType;
     }
 
@@ -56,6 +138,14 @@ public class Item implements Comparable {
 
     public String getHashName() {
         return hashName;
+    }
+
+    public double getSteamAvgPrice() {
+        return steamAvgPrice;
+    }
+
+    public void setSteamAvgPrice(double steamAvgPrice) {
+        this.steamAvgPrice = steamAvgPrice;
     }
 
     public void setHashName(String hashName) {
@@ -94,12 +184,28 @@ public class Item implements Comparable {
         this.marketMedianPrice = marketMedianPrice;
     }
 
-    public int getSteamVolume() {
-        return steamVolume;
+    public int getSteam24HVolume() {
+        return steam24HVolume;
     }
 
-    public void setSteamVolume(int steamVolume) {
-        this.steamVolume = steamVolume;
+    public void setSteam24HVolume(int steam24HVolume) {
+        this.steam24HVolume = steam24HVolume;
+    }
+
+    public int getSteamWeekVolume() {
+        return steamWeekVolume;
+    }
+
+    public void setSteamWeekVolume(int steamWeekVolume) {
+        this.steamWeekVolume = steamWeekVolume;
+    }
+
+    public int getSteamMonthVolume() {
+        return steamMonthVolume;
+    }
+
+    public void setSteamMonthVolume(int steamMonthVolume) {
+        this.steamMonthVolume = steamMonthVolume;
     }
 
     public int getMarketVolume() {
@@ -110,8 +216,11 @@ public class Item implements Comparable {
         this.marketVolume = marketVolume;
     }
 
-    @Override
-    public int compareTo(@NotNull Object bean) {
-        return this.hashName.compareTo(((Item) bean).hashName);
+    public int getSteamAvgVolume() {
+        return steamAvgVolume;
+    }
+
+    public void setSteamAvgVolume(int steamAvgVolume) {
+        this.steamAvgVolume = steamAvgVolume;
     }
 }

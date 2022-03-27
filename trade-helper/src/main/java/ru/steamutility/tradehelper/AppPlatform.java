@@ -2,6 +2,9 @@ package ru.steamutility.tradehelper;
 
 import ru.steamutility.tradehelper.common.Config;
 import ru.steamutility.tradehelper.controller.MessageBox;
+import ru.steamutility.tradehelper.getrequest.GetRequest;
+import ru.steamutility.tradehelper.getrequest.GetRequestType;
+import ru.steamutility.tradehelper.getrequest.GetRequests;
 
 import java.io.File;
 
@@ -28,6 +31,22 @@ public class AppPlatform {
 
     public static String getConfigPath() {
         return configPath;
+    }
+
+
+    public static boolean areConfigKeysValid() {
+        boolean valid;
+        valid = isMarketKeyValid(Config.getProperty("marketApiKey"));
+        valid &= isApisKeyValid(Config.getProperty("apisApiKey"));
+        return valid;
+    }
+
+    public static boolean isMarketKeyValid(String key) {
+        return GetRequests.makeRequest(GetRequestType.MARKET_GET_BALANCE, key) != null;
+    }
+
+    public static boolean isApisKeyValid(String key) {
+        return GetRequests.makeRequest(GetRequestType.APIS_GET_ITEMS, key) != null;
     }
 }
 

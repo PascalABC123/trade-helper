@@ -6,9 +6,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import ru.steamutility.tradehelper.common.Config;
 import ru.steamutility.tradehelper.common.USDRateHistory;
 import ru.steamutility.tradehelper.controller.MessageBox;
@@ -64,6 +62,7 @@ public class TradeHelperApp extends Application {
 
         startInBackground("Items Init", Items::initMarket);
         startInBackground("Items Init", Items::initSteam);
+        startInBackground("Items Init", Items::initApis);
         startInBackground("Trade Helper Launch", this::backgroundStart);
     }
 
@@ -89,14 +88,12 @@ public class TradeHelperApp extends Application {
     private void backgroundStart() {
         USDRateHistory.requestRecord();
 
-        if(Config.isUnset()) {
+        if (Config.isUnset()) {
             defaultSceneManager.invoke(SceneManager.Window.SETUP_MENU);
-        }
-        else if(!CSGOMarketApiClient.isConfigKeyValid()) {
+        } else if (!AppPlatform.areConfigKeysValid()) {
             defaultSceneManager.invoke(SceneManager.Window.SETUP_MENU);
-            MessageBox.alert("Wrong market api key");
-        }
-        else {
+            MessageBox.alert("Wrong api keys!");
+        } else {
             defaultSceneManager.invoke(SceneManager.Window.HOME_MENU);
         }
 
@@ -110,7 +107,6 @@ public class TradeHelperApp extends Application {
         assert java.awt.Toolkit.getDefaultToolkit() != null;
 
         if (!java.awt.SystemTray.isSupported()) {
-            System.out.println("No system tray support, application exiting.");
             Platform.exit();
         }
 

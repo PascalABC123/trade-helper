@@ -66,12 +66,9 @@ public class SceneManager {
                 loader = new FXMLLoader();
 
                 switch (window) {
-                    case HOME_MENU ->
-                            loader.setLocation(TradeHelperApp.class.getResource("HomeWindow.fxml"));
-                    case SETUP_MENU ->
-                            loader.setLocation(TradeHelperApp.class.getResource("SetupWindow.fxml"));
-                    case USD_CHART ->
-                            loader.setLocation(TradeHelperApp.class.getResource("USDChartWindow.fxml"));
+                    case HOME_MENU -> loader.setLocation(TradeHelperApp.class.getResource("HomeWindow.fxml"));
+                    case SETUP_MENU -> loader.setLocation(TradeHelperApp.class.getResource("SetupWindow.fxml"));
+                    case USD_CHART -> loader.setLocation(TradeHelperApp.class.getResource("USDChartWindow.fxml"));
                 }
 
                 scene = new Scene(loader.load(), stage.getWidth(), stage.getHeight());
@@ -100,9 +97,9 @@ public class SceneManager {
     }
 
     private void fixSize() {
-        if(stage.getWidth() < defaultWidth - 1)
+        if (stage.getWidth() < defaultWidth - 1)
             stage.setWidth(defaultWidth);
-        if(stage.getHeight() < defaultHeight - 1)
+        if (stage.getHeight() < defaultHeight - 1)
             stage.setHeight(defaultHeight);
     }
 
@@ -117,7 +114,7 @@ public class SceneManager {
 
         goBack.setText("\uD83E\uDC14");
         goBack.setFont(Font.font(25));
-        goBack.setTextFill(Color.rgb(20,20,20));
+        goBack.setTextFill(Color.rgb(20, 20, 20));
         goBack.setCursor(Cursor.HAND);
 
         goBack.onMouseEnteredProperty().set(actionEvent -> {
@@ -125,7 +122,7 @@ public class SceneManager {
         });
 
         goBack.onMouseExitedProperty().set(actionEvent -> {
-            goBack.setTextFill(Color.rgb(20,20,20));
+            goBack.setTextFill(Color.rgb(20, 20, 20));
         });
 
         goBack.onMouseClickedProperty().set(actionEvent -> {

@@ -2,7 +2,6 @@ package ru.steamutility.tradehelper.common;
 
 import ru.steamutility.tradehelper.AppPlatform;
 import ru.steamutility.tradehelper.economy.Economy;
-import ru.steamutility.tradehelper.util.Util;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -33,7 +32,7 @@ public class USDRateHistory {
         try (var br = new BufferedReader(new FileReader(String.valueOf(file)))) {
             while (br.ready()) {
                 String[] res = br.readLine().split(" -- ");
-                if(res.length == 2) {
+                if (res.length == 2) {
                     Date d = df.parse(res[0]);
                     if (Util.areDatesEqualByDay(date, d)) {
                         ans = Util.parseDouble(res[1]);
@@ -48,7 +47,7 @@ public class USDRateHistory {
 
     public static void requestRecord() {
         final Date now = new Date();
-        if(getUsdRateByDate(now) == 0) {
+        if (getUsdRateByDate(now) == 0) {
             try {
                 String s = String.format("%s -- %s\n", df.format(now), Economy.getUSDRateString());
                 Files.write(file, s.getBytes(), StandardOpenOption.APPEND);
@@ -62,7 +61,7 @@ public class USDRateHistory {
         final TreeMap<Date, Double> records = new TreeMap<>();
         try {
             List<String> lines = Files.readAllLines(file);
-            for(String l : lines) {
+            for (String l : lines) {
                 String[] s = l.split(" -- ");
                 if (s.length == 2) {
                     Date date = df.parse(s[0]);
@@ -72,7 +71,7 @@ public class USDRateHistory {
                     records.put(date, Util.parseDouble(s[1]));
                 }
             }
-        } catch (IOException | ParseException e ) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return records;

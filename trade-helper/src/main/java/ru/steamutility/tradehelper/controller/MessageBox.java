@@ -21,7 +21,7 @@ public class MessageBox implements Initializable {
     private static final ArrayList<String> messages = new ArrayList<>();
 
     public static void alert(String message) {
-        if(messages.isEmpty()) alertNow(message);
+        if (messages.isEmpty()) alertNow(message);
         messages.add(message);
     }
 
@@ -56,7 +56,7 @@ public class MessageBox implements Initializable {
     private void close() {
         messages.remove(0);
         stage.hide();
-        if(!messages.isEmpty())
+        if (!messages.isEmpty())
             alertNow(messages.get(0));
     }
 }

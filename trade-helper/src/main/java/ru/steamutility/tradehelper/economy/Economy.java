@@ -2,12 +2,12 @@ package ru.steamutility.tradehelper.economy;
 
 import org.json.JSONObject;
 import ru.steamutility.tradehelper.common.USDRateHistory;
-import ru.steamutility.tradehelper.request.SteamMarketRequest;
-import ru.steamutility.tradehelper.util.Util;
+import ru.steamutility.tradehelper.getrequest.GetRequests;
+import ru.steamutility.tradehelper.getrequest.GetRequestType;
+import ru.steamutility.tradehelper.common.Util;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Economy {
     private static final String referenceItem = "AWP%20%7C%20Fade%20%28Factory%20New%29";
@@ -19,10 +19,11 @@ public class Economy {
     }
 
     public static double getUSDRate() {
-        if(USDRate == 0) {
-            var r = new SteamMarketRequest();
-            JSONObject resUSD = r.makeRequest(SteamMarketRequest.RequestType.GET_ITEM_PRICE, referenceItem, "1");
-            JSONObject resRub = r.makeRequest(SteamMarketRequest.RequestType.GET_ITEM_PRICE, referenceItem, "5");
+        if (USDRate == 0) {
+            JSONObject resUSD = new JSONObject(GetRequests.
+                    makeRequest(GetRequestType.STEAM_GET_ITEM_PRICE, referenceItem, "1"));
+            JSONObject resRub = new JSONObject(GetRequests.
+                    makeRequest(GetRequestType.STEAM_GET_ITEM_PRICE, referenceItem, "5"));
             double usd = Util.parseDouble(resUSD.getString("lowest_price"));
             double rub = Util.parseDouble(resRub.getString("lowest_price"));
             USDRate = rub / usd;
@@ -44,5 +45,17 @@ public class Economy {
         double finite = USDRateHistory.getUsdRateByDate(new Date());
 
         return init - finite;
+    }
+
+    public static TreeSet<Item> getSortedItems() {
+        TreeSet<Item> items = new TreeSet<>((i1, i2) -> {
+            Double d1 = i1.getDepositProfit();
+            Double d2 = i2.getDepositProfit();
+            return d2.compareTo(d1);
+        });
+        List<Item> initialized = Items.getItemList().stream().filter(x -> (x.getSteamPrice() != 0 && x.getMarketPrice() != 0)).toList();
+        System.out.println("SortedItems size: " + initialized.size());
+        items.addAll(initialized);
+        return items;
     }
 }

@@ -1,4 +1,4 @@
-package ru.steamutility.tradehelper.util;
+package ru.steamutility.tradehelper.common;
 
 import javafx.util.Pair;
 
@@ -20,7 +20,7 @@ public class Util {
      */
     public static double parseDouble(String d) {
         d = d.replaceAll("[^0-9\\,\\.]*", "");
-        if(d.charAt(d.length() - 1) == '.')
+        if (d.charAt(d.length() - 1) == '.')
             d = d.substring(0, d.length() - 1);
         int comma = 0;
         for (int i = 0; i < d.length(); i++) {
@@ -41,6 +41,7 @@ public class Util {
 
     /**
      * checks if config line is property
+     *
      * @param property raw config line
      * @return is line a property
      */
@@ -52,11 +53,12 @@ public class Util {
     /**
      * Fetches property:value pair from line.
      * If String is not a property returns {"", ""}.
+     *
      * @param property raw config line
      * @return property:value pair
      */
     public static Pair<String, String> getPropertyPair(String property) {
-        if(!isProperty(property)) return new Pair<>("", "");
+        if (!isProperty(property)) return new Pair<>("", "");
 
         String key = property.split(":")[0];
         String value = property.substring(key.length() + 1).split("//")[0].trim();
@@ -68,12 +70,13 @@ public class Util {
     /**
      * Replaces value in a property line.
      * If is not a property line returns null.
+     *
      * @param property raw property line
-     * @param value value to put
+     * @param value    value to put
      * @return ready property line
      */
     public static String replacePropertyValue(String property, String value) {
-        if(!isProperty(property)) return null;
+        if (!isProperty(property)) return null;
 
         String key = property.split(":")[0];
         return key + ": " + value;

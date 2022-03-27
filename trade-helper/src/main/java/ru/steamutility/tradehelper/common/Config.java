@@ -2,12 +2,10 @@ package ru.steamutility.tradehelper.common;
 
 import javafx.util.Pair;
 import ru.steamutility.tradehelper.AppPlatform;
-import ru.steamutility.tradehelper.util.Util;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,7 +35,7 @@ public class Config {
         String value = null;
         try {
             final List<String> lines = Files.readAllLines(config);
-            for(String l : lines) {
+            for (String l : lines) {
                 Pair<String, String> res = Util.getPropertyPair(l);
                 if (Objects.requireNonNull(res).getKey().equalsIgnoreCase(property)) {
                     value = res.getValue();
@@ -69,22 +67,18 @@ public class Config {
     }
 
     public static void setProperty(String property, String value) {
-        String res = Util.makePropertyLine(property, value) + "\n";
-        try(final var raf = new RandomAccessFile(config.toFile(), "rw")) {
-            boolean found = false;
-            long pos = 0;
-            while((pos = raf.getFilePointer()) < raf.length()) {
-                String line = raf.readLine();
-                Pair<String, String> p = Util.getPropertyPair(line);
-                if(p.getKey().equalsIgnoreCase(property)) {
-                    found = true;
-                    raf.seek(pos);
-                    raf.write(res.getBytes());
+        final String res = Util.makePropertyLine(property, value);
+        try {
+            final List<String> lines = Files.readAllLines(config);
+            for (int i = 0; i < lines.size(); i++) {
+                Pair<String, String> p = Util.getPropertyPair(lines.get(i));
+                if (p.getKey().equalsIgnoreCase(property)) {
+                    lines.remove(i);
+                    break;
                 }
             }
-            if(!found) {
-                Files.write(config, res.getBytes(), StandardOpenOption.APPEND);
-            }
+            lines.add(res);
+            Files.write(config, lines);
         } catch (IOException e) {
             e.printStackTrace();
         }
