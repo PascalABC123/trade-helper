@@ -9,14 +9,27 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.steamutility.tradehelper.Refreshable;
-import ru.steamutility.tradehelper.economy.Economy;
+import ru.steamutility.tradehelper.economy.*;
 import ru.steamutility.tradehelper.SceneManager;
 import ru.steamutility.tradehelper.TradeHelperApp;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class HomeWindowController implements Initializable, Refreshable {
+
+    private static volatile HomeWindowController singleton;
+
+    public HomeWindowController() {
+        singleton = this;
+    }
 
     @WidthAutoResizeable
     @FXML
@@ -34,11 +47,24 @@ public class HomeWindowController implements Initializable, Refreshable {
     @FXML
     public ScrollPane scrollPane;
 
+    @WidthAutoResizeable
+    @FXML
+    public AnchorPane itemsPane;
+
     @FXML
     private Label usdRateLabel;
 
     @FXML
     private Label usdRateText;
+
+    @FXML
+    private Label bestToDeposit;
+
+    @FXML
+    private Label depositMore;
+
+    @FXML
+    private Label bestToDepositProfit;
 
     @FXML
     private void setPaneUnfocused() {
@@ -57,6 +83,20 @@ public class HomeWindowController implements Initializable, Refreshable {
 
     @FXML
     private void requestSettings() {
+        ArrayList<Predicate<Item>> filters = new ArrayList<>() {{
+            add(Filters.getFilter(FilterType.STEAM_MIN_PRICE, 0.3));
+            add(Filters.getFilter(FilterType.STEAM_MIN_VOLUME, 100.00));
+        }};
+        var set = Items.getFilteredItems(filters);
+        Iterator<Item> i = set.iterator();
+        File file = new File("C:\\Users\\Ульяна\\AppData\\Roaming\\Trade-Helper\\item_names");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            while(i.hasNext()) {
+                bw.write(i.next().getHashName() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         TradeHelperApp.getDefaultSceneManager().invoke(SceneManager.Window.SETUP_MENU);
     }
 
@@ -73,6 +113,14 @@ public class HomeWindowController implements Initializable, Refreshable {
             usdRateLabel.setTextFill(Color.rgb(198, 84, 80));
         else
             usdRateLabel.setTextFill(Color.rgb(73, 155, 84));
+
+        bestToDeposit.setText("...");
+        bestToDepositProfit.setText("...");
+    }
+
+    public static void initializeItems(Item deposit, Item withdraw) {
+        singleton.bestToDeposit.setText(deposit.getHashName());
+        singleton.bestToDepositProfit.setText(String.valueOf(deposit.getDepositProfitPercent()));
     }
 
     @Override

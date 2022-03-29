@@ -53,7 +53,8 @@ public class SceneManager {
     public enum Window {
         HOME_MENU,
         SETUP_MENU,
-        USD_CHART
+        USD_CHART,
+        SORTED_ITEMS_LIST
     }
 
     public void invoke(Window window) {

@@ -47,15 +47,4 @@ public class Economy {
         return init - finite;
     }
 
-    public static TreeSet<Item> getSortedItems() {
-        TreeSet<Item> items = new TreeSet<>((i1, i2) -> {
-            Double d1 = i1.getDepositProfit();
-            Double d2 = i2.getDepositProfit();
-            return d2.compareTo(d1);
-        });
-        List<Item> initialized = Items.getItemList().stream().filter(x -> (x.getSteamPrice() != 0 && x.getMarketPrice() != 0)).toList();
-        System.out.println("SortedItems size: " + initialized.size());
-        items.addAll(initialized);
-        return items;
-    }
 }

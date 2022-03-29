@@ -15,6 +15,7 @@ public class Item implements Comparable {
     private double steamPrice, marketPrice;
     private double steamAvgPrice;
     private double steamMedianPrice, marketMedianPrice;
+    private double steamMaxPrice, steamMinPrice;
     private int marketVolume;
     private int steam24HVolume, steamWeekVolume, steamMonthVolume;
     private int steamAvgVolume;
@@ -186,6 +187,22 @@ public class Item implements Comparable {
 
     public int getSteam24HVolume() {
         return steam24HVolume;
+    }
+
+    public double getSteamMaxPrice() {
+        return steamMaxPrice;
+    }
+
+    public void setSteamMaxPrice(double steamMaxPrice) {
+        this.steamMaxPrice = steamMaxPrice;
+    }
+
+    public double getSteamMinPrice() {
+        return steamMinPrice;
+    }
+
+    public void setSteamMinPrice(double steamMinPrice) {
+        this.steamMinPrice = steamMinPrice;
     }
 
     public void setSteam24HVolume(int steam24HVolume) {
